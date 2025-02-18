@@ -19,13 +19,14 @@ Para instalar las dependencias y poner en marcha el proyecto, sigue estos pasos:
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
-   cd tu_repositorio
+   git clone https://github.com/jmarquezruiz/api-express-base.git
+   cd api-express-base
    ```
 
 2. Instala las dependencias utilizando `pnpm`:
 
    ```bash
+   cd api
    pnpm install
    ```
 
