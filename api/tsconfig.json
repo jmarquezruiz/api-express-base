@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",                         // El nivel de compatibilidad de JavaScript que deseas usar.
+    "module": "commonjs",                       // El módulo que usará tu proyecto.
+    "lib": ["ES2020"],                          // Las bibliotecas estándar de JavaScript que quieres incluir.
+    "outDir": "./dist",                         // El directorio de salida para los archivos compilados.
+    "rootDir": "./src",                         // El directorio raíz de tu código fuente.
+    "strict": true,                             // Habilita todas las verificaciones estrictas de tipo.
+    "esModuleInterop": true,                    // Habilita la interoperabilidad de los módulos ES.
+    "skipLibCheck": true,                       // Omite la comprobación de tipos en los archivos de definición.
+    "forceConsistentCasingInFileNames": true,   // Asegura el uso de mayúsculas y minúsculas consistentes en los nombres de archivo.
+    "resolveJsonModule": true,                  // Permite la importación de módulos JSON.
+    "noImplicitAny": true,                      // Evita el uso de tipos 'any' implícitos.
+    "noImplicitThis": true,                     // Asegura que 'this' tenga un tipo explícito.
+    "strictNullChecks": true,                   // Permite una verificación estricta de los tipos null y undefined.
+    "strictFunctionTypes": true,                // Habilita la verificación estricta de los tipos de función.
+    "strictBindCallApply": true,                // Habilita la verificación estricta de bind, call y apply.
+    "strictPropertyInitialization": false,       // Verifica que las propiedades de clase se inicialicen correctamente.
+    "noEmitOnError": true,                      // Evita la emisión de archivos si hay errores de tipo.
+    "experimentalDecorators": true,             // Permite el uso de decoradores.
+    "emitDecoratorMetadata": true,              // Emite metadatos de decoradores.
+    "baseUrl": "./",                            // Resuelve los módulos desde la raíz del proyecto.
+    "paths": {                                  // Mapea los módulos a rutas relativas.
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "src/types/global.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

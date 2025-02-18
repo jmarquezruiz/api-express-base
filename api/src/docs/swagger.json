@@ -1,0 +1,971 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Palabrejo API",
+    "version": "1.0.3",
+    "description": "Documentacion de la API de palabrejo para el juego de adivinar palabras de marmolejo"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3189/api",
+      "description": "Local server"
+    },
+    {
+      "url": "https://api.palabrejo.com/api",
+      "description": "Production server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "EjemploSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "example"
+          },
+          "number": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "EjemploDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "example"
+          },
+          "number": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "WordSchema": {
+        "type": "object",
+        "properties": {
+          "id_word": {
+            "type": "integer",
+            "example": 1
+          },
+          "word": {
+            "type": "string",
+            "example": "example"
+          },
+          "games": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameSchema"
+            }
+          }
+        }
+      },
+      "WordDTO": {
+        "type": "object",
+        "properties": {
+          "word": {
+            "type": "string",
+            "example": "example"
+          },
+          "description": {
+            "type": "string",
+            "example": "This is an example"
+          }
+        }
+      },
+      "GameSchema": {
+        "type": "object",
+        "properties": {
+          "id_game": {
+            "type": "integer",
+            "example": 1
+          },
+          "correct_word": {
+            "type": "string",
+            "example": "example"
+          },
+          "client_agent": {
+            "type": "string",
+            "example": "Mozilla/5.0"
+          },
+          "device": {
+            "type": "string",
+            "example": "desktop | mobile"
+          },
+          "client_ip": {
+            "type": "string",
+            "example": "127.0.0.1"
+          },
+          "share_telegram": {
+            "type": "boolean",
+            "example": false
+          },
+          "share_whatsapp": {
+            "type": "boolean",
+            "example": false
+          },
+          "copy_clipboard": {
+            "type": "boolean",
+            "example": false
+          },
+          "feedback": {
+            "type": "integer",
+            "example": 5
+          },
+          "feedback_text": {
+            "type": "string",
+            "example": "This is an example"
+          },
+          "word": {
+            "$ref": "#/components/schemas/WordSchema"
+          }
+        }
+      },
+      "GameDTO": {
+        "type": "object",
+        "properties": {}
+      },
+      "GameDTOPUT": {
+        "type": "object",
+        "properties": {
+          "share_telegram": {
+            "type": "boolean",
+            "example": false
+          },
+          "share_whatsapp": {
+            "type": "boolean",
+            "example": false
+          },
+          "copy_clipboard": {
+            "type": "boolean",
+            "example": false
+          },
+          "feedback": {
+            "type": "integer",
+            "example": 5
+          },
+          "feedback_text": {
+            "type": "string",
+            "example": "This is an example"
+          }
+        }
+      },
+      "UserLogin": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "barto"
+          },
+          "password": {
+            "type": "string",
+            "example": "Barto123."
+          }
+        }
+      },
+      "TrySchema": {
+        "type": "object",
+        "properties": {
+          "id_try": {
+            "type": "integer",
+            "example": 1
+          },
+          "user_word": {
+            "type": "string",
+            "example": "example"
+          },
+          "is_correct": {
+            "type": "boolean",
+            "example": true
+          },
+          "number_try": {
+            "type": "integer",
+            "example": 1
+          },
+          "number_tips_used": {
+            "type": "integer",
+            "example": 0
+          },
+          "create_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-09-10T00:00:00Z"
+          },
+          "game": {
+            "$ref": "#/components/schemas/GameSchema"
+          }
+        }
+      },
+      "TryDTO": {
+        "type": "object",
+        "properties": {
+          "user_word": {
+            "type": "string",
+            "example": "example"
+          },
+          "is_correct": {
+            "type": "boolean",
+            "example": true
+          },
+          "number_try": {
+            "type": "integer",
+            "example": 1
+          },
+          "number_tips_used": {
+            "type": "integer",
+            "example": 0
+          },
+          "id_game": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "TryDTOPUT": {
+        "type": "object",
+        "properties": {
+          "user_word": {
+            "type": "string",
+            "example": "example"
+          },
+          "is_correct": {
+            "type": "boolean",
+            "example": true
+          },
+          "number_try": {
+            "type": "integer",
+            "example": 1
+          },
+          "number_tips_used": {
+            "type": "integer",
+            "example": 0
+          },
+          "id_game": {
+            "type": "integer",
+            "example": 1
+          },
+          "times": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Login user and get token",
+        "tags": ["User"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful, JWT returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5..."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/auth/maintenance": {
+      "get": {
+        "summary": "Check if the server is in maintenance",
+        "tags": ["User"],
+        "responses": {
+          "200": {
+            "description": "Server is in maintenance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "maintenance": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ejemplo": {
+      "get": {
+        "summary": "Get all ejemplos",
+        "tags": ["Ejemplo"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EjemploSchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a ejemplo",
+        "tags": ["Ejemplo"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EjemploDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ejemplo created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EjemploSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ejemplo/{id}": {
+      "get": {
+        "summary": "Get a ejemplo by id",
+        "tags": ["Ejemplo"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EjemploSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ejemplo not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a ejemplo",
+        "tags": ["Ejemplo"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EjemploDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ejemplo updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EjemploSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ejemplo not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a ejemplo",
+        "tags": ["Ejemplo"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ejemplo deleted"
+          },
+          "404": {
+            "description": "Ejemplo not found"
+          }
+        }
+      }
+    },
+    "/word": {
+      "get": {
+        "summary": "Get all words",
+        "tags": ["Word"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WordSchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a word",
+        "tags": ["Word"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WordDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Word created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WordSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/word/{id}": {
+      "get": {
+        "summary": "Get a word by id",
+        "tags": ["Word"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WordSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Word not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a word",
+        "tags": ["Word"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WordDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Word updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WordSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Word not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a word",
+        "tags": ["Word"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Word deleted"
+          },
+          "404": {
+            "description": "Word not found"
+          }
+        }
+      }
+    },
+    "/game": {
+      "get": {
+        "summary": "Get all games",
+        "tags": ["Game"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameSchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a game",
+        "tags": ["Game"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Game created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/game/{id}": {
+      "get": {
+        "summary": "Get a game by id",
+        "tags": ["Game"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Game not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a game",
+        "tags": ["Game"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameDTOPUT"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Game updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameSchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Game not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a game",
+        "tags": ["Game"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Game deleted"
+          },
+          "404": {
+            "description": "Game not found"
+          }
+        }
+      }
+    },
+    "/try": {
+      "get": {
+        "summary": "Get all tries",
+        "tags": ["Try"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TrySchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a try",
+        "tags": ["Try"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TryDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Try created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrySchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/try/{id}": {
+      "get": {
+        "summary": "Get a try by id",
+        "tags": ["Try"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrySchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Try not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a try",
+        "tags": ["Try"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TryDTOPUT"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Try updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrySchema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Try not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a try",
+        "tags": ["Try"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Try deleted"
+          },
+          "404": {
+            "description": "Try not found"
+          }
+        }
+      }
+    }
+  }
+}
